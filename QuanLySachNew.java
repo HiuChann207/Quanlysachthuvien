@@ -1,32 +1,26 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-/* ArrayList<String> cars = new ArrayList<>(); */
 
-
-public class QuanLySachNew{
+public class QuanLySachNew {
     public static void main(String[] args) {
         int luaChon;
         Scanner sc = new Scanner(System.in);
 
-        // Khai báo maSach, tenSach, tacGia, namXB, donGia, soLuong 
+        // Khai báo các ArrayList
         ArrayList<String> maSach = new ArrayList<>();
         ArrayList<String> tenSach = new ArrayList<>();
         ArrayList<String> tacGia = new ArrayList<>();
         ArrayList<Integer> namXB = new ArrayList<>();
         ArrayList<Integer> donGia = new ArrayList<>();
         ArrayList<Integer> soLuong = new ArrayList<>();
-        // Xây dựng: ArrayList<String> danhSachSach;
-        // Mỗi phần tử đại diện cho thông tin của một cuốn sách.
-        // Thực hiện: Thêm sách, Hiển thị sách, Tìm sách, Xóa sách, Sửa sách
         ArrayList<String> danhSachSach = new ArrayList<>();
         
         int tongSL = 0;
         int tongGT = 0;
         int maxSL = 0;
 
-        // menu lựa chọn
-        do{
-            System.out.println("======= Quan ly sach ========");
+        do {
+            System.out.println("\n======= Quan ly sach ========");
             System.out.println("1. Them sach");
             System.out.println("2. Hien thi sach");
             System.out.println("3. Tim sach");
@@ -35,146 +29,164 @@ public class QuanLySachNew{
             System.out.println("6. Tinh tong so luong");
             System.out.println("7. Tinh tong gia tri");
             System.out.println("8. Thoat");
-            System.out.println("Nhap lua chon: ");
+            System.out.print("Nhap lua chon: ");
             luaChon = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Dọn bộ đệm sau khi nhập số
+
             switch (luaChon) {
-                case 1:
-                    {
-                        //Bài 1: Nhập n sách bằng vòng lặp
-                        // Nhập thông tin sách
-                        sc.nextLine();
-                        System.out.println("Nhap ma sach: ");
-                        maSach.add(sc.nextLine());
-                        System.out.println("Nhap ten sach: ");
-                        tenSach.add(sc.nextLine());
-                        System.out.println("Nhap tac gia: ");
-                        tacGia.add(sc.nextLine());
-                        System.out.println("Nhap nam xuat ban: ");
-                        namXB.add(sc.nextInt());
-                        System.out.println("Nhap don gia: ");
-                        donGia.add(sc.nextInt());
-                        System.out.println("Nhap so luong: ");
-                        soLuong.add(sc.nextInt());
+                case 1: {
+                    System.out.print("Nhap ma sach: ");
+                    String ma = sc.nextLine();
+                    maSach.add(ma);
+                    
+                    System.out.print("Nhap ten sach: ");
+                    String ten = sc.nextLine();
+                    tenSach.add(ten);
+                    
+                    System.out.print("Nhap tac gia: ");
+                    String tg = sc.nextLine();
+                    tacGia.add(tg);
+                    
+                    System.out.print("Nhap nam xuat ban: ");
+                    int nam = sc.nextInt();
+                    namXB.add(nam);
+                    
+                    System.out.print("Nhap don gia: ");
+                    int gia = sc.nextInt();
+                    donGia.add(gia);
+                    
+                    System.out.print("Nhap so luong: ");
+                    int sl = sc.nextInt();
+                    soLuong.add(sl);
+                    sc.nextLine(); // Dọn bộ đệm sau khi nhập số lần cuối
 
-                        // tính tổng sl và tổng gt
-                        for(int i=0; i<maSach.size(); i++)
-                        {
-                            danhSachSach.add(maSach.get(i) + " - " + tenSach.get(i) + " - " + tacGia.get(i) + " - " + namXB.get(i) + " - " + donGia.get(i) + " - " + soLuong.get(i) + "\n");
-                            tongSL += soLuong.get(i);
-                            tongGT += soLuong.get(i)*donGia.get(i);
-                            maxSL = (maxSL<soLuong.get(i)) ? soLuong.get(i):maxSL;
+                    // Thêm trực tiếp vào danh sách hiển thị (Không dùng vòng lặp)
+                    String thongTin = ma + " - " + ten + " - " + tg + " - " + nam + " - " + gia + " - " + sl;
+                    danhSachSach.add(thongTin);
 
-                        }
-                        
-                        //Xuất tổng số lượng lớn nhất
-                        System.out.print("Tong so luong lon nhat: " + maxSL);
+                    // Cập nhật tổng
+                    tongSL += sl;
+                    tongGT += (sl * gia);
+                    if (maxSL < sl) {
+                        maxSL = sl;
                     }
+
+                    System.out.println("Da them sach thanh cong!");
                     break;
-                
-                case 2:
-                    {
-                        // in tổng số lượng và giá trị sách
-                        for(int i = 0; i<maSach.size(); i++)
-                        {
-                            System.out.print("\n-------------------------");
-                            System.out.print("\nSach thu " + i + "\n");
-                            System.out.print(danhSachSach + "\n");
-                        }
-                    }
-                    break;
-                
-                case 3:
-                    {
-                        // tìm sách theo mã
-                        boolean isTimThaySach = false;
-                        int i;
-
-                        System.out.print("Nhap ma muon tim: ");
-                        String timMaSach;
-                        timMaSach = sc.nextLine();
-
-                        for(i = 0; i<maSach.size(); i++)
-                            if (timMaSach.equals(maSach.get(i))) {
-                                isTimThaySach = true;
-                                break;
-                            }
-                            else{
-                                isTimThaySach = false;
-                            }
-                                
-                        
-                        // in kết quả
-                        if (isTimThaySach) {                            
-                            System.out.print(danhSachSach.get(i));
-                        }
-                        else{
-                            System.out.print("Khong tim thay");
-                        }
-                        
-                    }
-                    break;
-
-                case 4:
-                    {
-                        //Xóa mã sách
-                        String maSach_Xoa;
-                        System.out.print("Nhap ma sach muon xoa: ");
-                        maSach_Xoa = sc.nextLine();
-
-                        danhSachSach.remove(maSach.indexOf(maSach_Xoa));
-                    }
-                    break;
-
-                case 5:
-                    {
-                        // Sửa sách
-                        System.out.print("Nhap ma sach muon sua: ");
-                        String suaMaSach = sc.nextLine();
-
-                        for (int i = 0; i < danhSachSach.size(); i++) {
-                            if (danhSachSach.get(i).startsWith(suaMaSach + " - ")) {
-                                System.out.print("Nhap ten sach moi: ");
-                                String tenMoi = sc.nextLine();
-                                System.out.print("Nhap tac gia moi: ");
-                                String tacGiaMoi = sc.nextLine();
-                                System.out.print("Nhap nam xuat ban moi: ");
-                                int namXBMoi = sc.nextInt();
-                                System.out.print("Nhap don gia moi: ");
-                                int donGiaMoi = sc.nextInt();
-                                System.out.print("Nhap so luong moi: ");
-                                int soLuongMoi = sc.nextInt();
-                                sc.nextLine(); // Dọn bộ đệm
-                                // Tạo chuỗi mới với mã sách cũ nhưng các thông tin khác đã được cập nhật
-                                String sachMoi = suaMaSach + " - " + tenMoi + " - " + tacGiaMoi + " - " + namXBMoi + " - " + donGiaMoi + " - " + soLuongMoi;
-                                
-                                // Ghi đè chuỗi mới vào vị trí i
-                                danhSachSach.set(i, sachMoi);
-                                System.out.println(danhSachSach);
-                                break;
-                            }
-                        }
                 }
-                break;
+                
+                case 2: {
+                    for (int i = 0; i < maSach.size(); i++) {
+                            System.out.println("-------------------------");
+                            System.out.println("Sach thu " + (i + 1) + ":");
+                            System.out.println(danhSachSach.get(i));
+                        }
+                    break;
+                }
+                
+                case 3: {
+                    System.out.print("Nhap ma muon tim: ");
+                    String timMaSach = sc.nextLine();
+                    
+                    // Sử dụng indexOf có sẵn của ArrayList để tìm kiếm nhanh
+                    int index = maSach.indexOf(timMaSach);
 
-                case 6:
-                    {
-                        // Tính tổng số lượng
-                        System.out.print("So luong: " + tongSL);
+                    if (index != -1) {
+                        System.out.println("Tim thay sach: ");
+                        System.out.println(danhSachSach.get(index));
+                    } else {
+                        System.out.println("Khong tim thay ma sach: " + timMaSach);
                     }
                     break;
+                }
 
-                case 7:
-                    {
-                        // Tính tổng giá trị
-                        System.out.print("Tong gia tri: " + tongGT);
+                case 4: {
+                    System.out.print("Nhap ma sach muon xoa: ");
+                    String maSach_Xoa = sc.nextLine();
+                    int indexXoa = maSach.indexOf(maSach_Xoa);
+
+                    if (indexXoa != -1) {
+                        // Cập nhật lại tổng số lượng và giá trị trước khi xóa
+                        tongSL -= soLuong.get(indexXoa);
+                        tongGT -= (soLuong.get(indexXoa) * donGia.get(indexXoa));
+
+                        // Xóa đồng bộ ở tất cả các List
+                        maSach.remove(indexXoa);
+                        tenSach.remove(indexXoa);
+                        tacGia.remove(indexXoa);
+                        namXB.remove(indexXoa);
+                        donGia.remove(indexXoa);
+                        soLuong.remove(indexXoa);
+                        danhSachSach.remove(indexXoa);
+
+                        System.out.println("Da xoa sach thanh cong!");
+                    } else {
+                        System.out.println("Khong tim thay sach de xoa.");
                     }
+                    break;
+                }
+
+                case 5: {
+                    System.out.print("Nhap ma sach muon sua: ");
+                    String suaMaSach = sc.nextLine();
+                    int indexSua = maSach.indexOf(suaMaSach);
+
+                    if (indexSua != -1) {
+                        // Trừ đi giá trị cũ khỏi tổng
+                        tongSL -= soLuong.get(indexSua);
+                        tongGT -= (soLuong.get(indexSua) * donGia.get(indexSua));
+
+                        System.out.print("Nhap ten sach moi: ");
+                        String tenMoi = sc.nextLine();
+                        System.out.print("Nhap tac gia moi: ");
+                        String tacGiaMoi = sc.nextLine();
+                        System.out.print("Nhap nam xuat ban moi: ");
+                        int namXBMoi = sc.nextInt();
+                        System.out.print("Nhap don gia moi: ");
+                        int donGiaMoi = sc.nextInt();
+                        System.out.print("Nhap so luong moi: ");
+                        int soLuongMoi = sc.nextInt();
+                        sc.nextLine(); // Dọn bộ đệm
+
+                        // Cập nhật đồng bộ các List
+                        tenSach.set(indexSua, tenMoi);
+                        tacGia.set(indexSua, tacGiaMoi);
+                        namXB.set(indexSua, namXBMoi);
+                        donGia.set(indexSua, donGiaMoi);
+                        soLuong.set(indexSua, soLuongMoi);
+
+                        // Cộng giá trị mới vào tổng
+                        tongSL += soLuongMoi;
+                        tongGT += (soLuongMoi * donGiaMoi);
+
+                        // Cập nhật danh sách hiển thị
+                        String sachMoi = suaMaSach + " - " + tenMoi + " - " + tacGiaMoi + " - " + namXBMoi + " - " + donGiaMoi + " - " + soLuongMoi;
+                        danhSachSach.set(indexSua, sachMoi);
+                        
+                        System.out.println("Da cap nhat thong tin sach!");
+                    } else {
+                        System.out.println("Khong tim thay ma sach de sua.");
+                    }
+                    break;
+                }
+
+                case 6: {
+                    System.out.println("Tong so luong sach hien co: " + tongSL);
+                    break;
+                }
+
+                case 7: {
+                    System.out.println("Tong gia tri sach hien co: " + tongGT);
+                    break;
+                }
+                
+                case 8:
                     break;
 
                 default:
-                    //thoát
+                    System.out.println("Lua chon khong hop le, vui long thu lai!");
                     break;
             }
-        }while (luaChon != 8);
+        } while (luaChon != 8);
     }
 }
