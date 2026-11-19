@@ -9,5 +9,13 @@ public class BTT78 {
         Sach.add(new sach("003", "Giai tich 1", "Tran C", 2026, 17));
         for(int i = 0; i< Sach.size(); i++)
             Sach.get(i).hienThiThongTin();
+
+        sach ThoCa = new sach();
+        ThoCa.setMasach("004");
+        ThoCa.setTieude("Tho dan gian");
+        ThoCa.setTacgia("Nhieu tac gia");
+        ThoCa.setNamXuatBan(2000);
+        ThoCa.setSoLuong(37);
+        ThoCa.hienThiThongTin();
     }
 }
